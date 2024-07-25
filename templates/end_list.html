@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+
+{%block header%}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">終わらせたことリスト！</h1>
+      <p class="lead">こんなにもこなしてきた。めちゃくちゃ頑張ってるよ</p>
+    </div>
+</div>
+{%endblock header%}
+
+{%block content%}
+<div class="container">
+    {%for item in todo_list%}
+    {% if item.status|stringformat:"s" != "未処理" %}
+    <div class="alert alert-success" role="alert">
+        <p>{{item.duedate|date:"n/j"}}〆:{{item.title}}：{{item.status}}</p>
+        <a href="{%url 'update' item.pk %}" class="btn btn-info" role="button" aria-disabled="true">編集</a>
+        <a href="{%url 'delete' item.pk %}" class="btn btn-success" role="button" aria-disabled="true">削除</a>
+        <a href="{%url 'detail' item.pk %}" class="btn btn-primary" role="button" aria-disabled="true">詳細</a>
+    </div>
+    {% endif %}
+    {%endfor%}
+    <a href="{%url 'list' %}" class="btn btn-info" role="button" aria-disabled="true">戻る</a>
+</div>
+{%endblock content%}

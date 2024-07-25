@@ -1,0 +1,28 @@
+{%extends 'base.html'%}
+
+{%block header%}
+<div class="">
+    <div class="">
+      <h1 class="" >{{user.get_username}}さんの頑張ることリスト</h1>
+      <p class="">あまり量に追われないで？ひとつずつ終わらせていこう</p>
+    </div>
+</div>
+{%endblock header%}
+
+{%block content%}
+<div class="container">
+    <a href="{%url 'create' %}" class="btn btn-secondary mb-2" role="button" aria-disabled="true">新規作成</a>
+    <a href="{%url 'end_list' %}" class="btn btn-secondary mb-2" role="button" aria-disabled="true">頑張ったことリスト</a>
+    {%for item in todo_list%}
+    {% if item.status|stringformat:"s" != "完了" %}
+    <div class="alert alert-success" role="alert">
+        <p>{{item.duedate|date:"n/j"}}〆:{{item.title}}：{{item.status}}</p>
+        <a href="{%url 'update' item.pk %}" class="btn btn-info" role="button" aria-disabled="true">編集</a>
+        <a href="{%url 'delete' item.pk %}" class="btn btn-success" role="button" aria-disabled="true">削除</a>
+        <a href="{%url 'detail' item.pk %}" class="btn btn-primary" role="button" aria-disabled="true">詳細</a>
+    </div>
+    {% endif %}
+    {%endfor%}
+    <a href="{% url 'logout' %}">ログアウト</a>
+</div>
+{%endblock content%}

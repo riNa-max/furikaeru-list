@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+
+{%block header%}
+<div class="alert alert-dark" role="alert">
+    detail
+</div>
+{%endblock%}
+
+{%block content%}
+<div class="alert alert-success" role="alert">
+    <p>〆切：{{object.duedate|date:"Y/n/j"}}</p>
+</div>
+<div class="alert alert-success" role="alert">
+    {{object.title}}
+</div>
+<div class="alert alert-success" role="alert">
+    {{object.memo}}
+</div>
+<div class="alert alert-success" role="alert">
+    <p>作成日：{{object.created_at|date:"Y/n/j"}}</p>
+</div>
+<div class="alert alert-success" role="alert">
+    <p>処理状況：{{object.status}}</p>
+</div>
+<a href="{%url 'list' %}" class="btn btn-info" role="button" aria-disabled="true">戻る</a>
+{%endblock content%}

@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<form action="" method="POST">{%csrf_token%}
+<div>
+    <p>タイトル：{{form.title}}</p>
+</div>
+<div>
+    <p>内容：{{form.memo}}</p>
+</div>
+<div>
+    <p>〆切：{{form.duedate}}</p>
+</div>
+<div>
+    <p>処理状況：
+        {%for radiobutton in form.status %}
+            {{radiobutton}}
+       {%endfor%}
+    </p>
+</div>
+
+<input type="submit" value="更新">
+</form>
+<a href="{%url 'list' %}" class="btn btn-info" role="button" aria-disabled="true">戻る</a>
+{%endblock content%}
